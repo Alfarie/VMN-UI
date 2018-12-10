@@ -8,6 +8,7 @@ class HomePage extends React.Component {
 
   render() {
     const props = this.props
+    console.log(props)
     return <Page {...props} />
   }
 }

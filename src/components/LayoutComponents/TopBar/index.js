@@ -8,25 +8,21 @@ import HomeMenu from './HomeMenu'
 import LiveSearch from './LiveSearch'
 import './style.scss'
 
+import { connect } from 'react-redux'
+const mapStateToProps = (state) => {
+  return {datetime: state.realTime.datetime}
+}
+@connect(mapStateToProps)
 class TopBar extends React.Component {
   render() {
+    const { datetime } = this.props
     return (
       <div className="topbar">
         <div className="topbar__left">
-          <IssuesHistory />
-          <ProjectManagement />
-          <LiveSearch />
+         
+          <span className="badge badge-primary"> <span style={{fontSize:"20px"}}> <i className={'icmn-clock'} /> {datetime}</span></span>
         </div>
         <div className="topbar__right">
-          <a
-            href="https://themeforest.net/item/clean-ui-admin-template-react-redux-ant-design-fully-responsive-freebies/21938700"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mr-4 d-none d-sm-inline"
-          >
-            <Button type="danger">Buy Now 25$</Button>
-          </a>
-          <BitcoinPrice />
           <HomeMenu />
           <ProfileMenu />
         </div>
