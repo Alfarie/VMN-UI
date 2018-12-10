@@ -1,16 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
 
 import { connect } from 'react-redux'
 
-
 const mapStateToProps = (state, props) => {
   return {
-    statusPage: state.app.statusPage
+    statusPage: state.app.statusPage,
   }
 }
 @connect(mapStateToProps)
@@ -26,9 +24,7 @@ class StatusPage extends React.Component {
             <h1 className="mb-4">
               <strong>{title}</strong>
             </h1>
-            <p className="mb-4">
-              {description}
-            </p>
+            <p className="mb-4">{description}</p>
             <Link to="/" className="btn">
               Go back to the main page
             </Link>
@@ -41,9 +37,7 @@ class StatusPage extends React.Component {
 
 StatusPage.defaultProps = {
   title: 'Show Status',
-  description: 'this is description'
+  description: 'this is description',
 }
 
-
 export default StatusPage
-

@@ -15,8 +15,7 @@ import enGB from 'antd/lib/locale-provider/en_GB'
 import registerServiceWorker from 'registerServiceWorker'
 
 import Layout from 'components/LayoutComponents/Layout'
-import {history,store} from 'ducks'
-
+import { history, store } from 'ducks'
 
 import 'resources/_antd.less' // redefinition AntDesign variables
 import 'bootstrap/dist/css/bootstrap.min.css' // bootstrap styles
@@ -25,9 +24,7 @@ import 'resources/AntStyles/AntDesign/antd.cleanui.scss'
 import 'resources/CleanStyles/Core/core.cleanui.scss'
 import 'resources/CleanStyles/Vendors/vendors.cleanui.scss'
 
-
-require('lib/socket');
-
+require('lib/socket')
 
 ReactDOM.render(
   <Provider store={store}>

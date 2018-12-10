@@ -19,7 +19,10 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="main-login main-login--fullscreen" style={{backgroundImage: this.state.backgroundImage}}>
+      <div
+        className="main-login main-login--fullscreen"
+        style={{ backgroundImage: this.state.backgroundImage }}
+      >
         {/* <div className="main-login__header">
           <div className="row">
             <div className="col-lg-12">

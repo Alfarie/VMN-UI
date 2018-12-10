@@ -16,21 +16,20 @@ export default [
         title: 'NVM SETTING',
         key: 'nvm-setting',
         url: '/setting/nvm-setting',
-        icon: 'icmn icmn-cogs'
+        icon: 'icmn icmn-cogs',
       },
       {
         title: 'WIFI',
         key: 'wifi',
         url: '/setting/wifi/station',
-        icon: 'icmn icmn-connection'
-        
+        icon: 'icmn icmn-connection',
       },
       {
         title: 'DATE & TIME',
         key: 'datentime',
         url: '/setting/datetime',
-        icon: 'icmn icmn-calendar'
-      }
+        icon: 'icmn icmn-calendar',
+      },
     ],
   },
   {

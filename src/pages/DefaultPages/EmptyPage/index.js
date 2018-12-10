@@ -11,7 +11,7 @@ class EmptyPage extends React.Component {
 
   render() {
     const props = this.props
-    console.log(props);
+    console.log(props)
     return (
       <Page {...props}>
         <Helmet title="Empty Page" />

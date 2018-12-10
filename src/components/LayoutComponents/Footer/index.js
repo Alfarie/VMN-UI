@@ -6,12 +6,9 @@ class AppFooter extends React.Component {
   render() {
     return (
       <div className="footer">
-        
         <div className="footer__top">
           <div className="row">
-            <div className="col-sm-6">
-              
-            </div>
+            <div className="col-sm-6" />
             <div className="col-sm-6">
               <div className="footer__copyright">
                 <img

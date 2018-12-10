@@ -26,7 +26,7 @@ class InfoCard extends React.Component {
               <span className="infoCard__title">{title}</span>
               <p>Total supply (ml/plant)</p>
             </div>
-            
+
             <div className="infoCard__right">
               <h4>{value}</h4>
             </div>

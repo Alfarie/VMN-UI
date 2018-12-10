@@ -13,7 +13,7 @@ import operation from './vmn-operation'
 import wifi from './wifi'
 import realTime from './real-time'
 import logger from './logger'
-export const reducer =  combineReducers({
+export const reducer = combineReducers({
   routing: routerReducer,
   pendingTasks: pendingTasksReducer,
   app,
@@ -21,7 +21,7 @@ export const reducer =  combineReducers({
   operation,
   wifi,
   realTime,
-  logger
+  logger,
 })
 
 export const history = createHistory()

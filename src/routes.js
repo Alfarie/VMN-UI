@@ -15,7 +15,6 @@ const loadable = loader =>
     loading: () => null,
   })
 
-  
 const loadableRoutes = {
   // Default Pages
   '/login': {
@@ -49,13 +48,12 @@ const loadableRoutes = {
     component: loadable(() => import('pages/VMNPages/DataLogger')),
   },
 
-
   '/dashboard/alpha': {
-    component: loadable(() => import('pages/DefaultPages/HomePage'))
+    component: loadable(() => import('pages/DefaultPages/HomePage')),
   },
   '/page/status': {
-    component: loadable(() => import('pages/VMNPages/StatusPage'))
-  }
+    component: loadable(() => import('pages/VMNPages/StatusPage')),
+  },
 }
 
 class Routes extends React.Component {

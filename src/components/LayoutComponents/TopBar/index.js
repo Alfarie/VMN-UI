@@ -9,8 +9,8 @@ import LiveSearch from './LiveSearch'
 import './style.scss'
 
 import { connect } from 'react-redux'
-const mapStateToProps = (state) => {
-  return {datetime: state.realTime.datetime}
+const mapStateToProps = state => {
+  return { datetime: state.realTime.datetime }
 }
 @connect(mapStateToProps)
 class TopBar extends React.Component {
@@ -19,8 +19,13 @@ class TopBar extends React.Component {
     return (
       <div className="topbar">
         <div className="topbar__left">
-         
-          <span className="badge badge-primary"> <span style={{fontSize:"20px"}}> <i className={'icmn-clock'} /> {datetime}</span></span>
+          <span className="badge badge-primary">
+            {' '}
+            <span style={{ fontSize: '20px' }}>
+              {' '}
+              <i className={'icmn-clock'} /> {datetime}
+            </span>
+          </span>
         </div>
         <div className="topbar__right">
           <HomeMenu />

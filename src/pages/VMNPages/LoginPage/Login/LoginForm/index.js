@@ -7,7 +7,7 @@ const FormItem = Form.Item
 
 const mapStateToProps = (state, props) => ({
   isSubmitForm: state.app.submitForms[REDUCER],
-  isLoginFail: state.app.submitForms['LOGIN_FAIL']
+  isLoginFail: state.app.submitForms['LOGIN_FAIL'],
 })
 
 @connect(mapStateToProps)
@@ -29,15 +29,15 @@ class LoginForm extends React.Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     // this.props.form.setFieldsValue({
-    //   usernameL 
+    //   usernameL
     // })
   }
 
   render() {
-    const { form, isSubmitForm, isLoginFail,dispatch } = this.props
-   
+    const { form, isSubmitForm, isLoginFail, dispatch } = this.props
+
     return (
       <div className="cat__pages__login__block__form">
         <h4 className="text-uppercase">
@@ -67,18 +67,21 @@ class LoginForm extends React.Component {
             })(<Input size="default" type="password" />)}
           </FormItem>
           <div className="mb-2">
-            { isLoginFail? (<Alert message="Error" 
-              type="error"  showIcon 
-              description="Invalid username or password."
-            />):null }
-          </div> 
+            {isLoginFail ? (
+              <Alert
+                message="Error"
+                type="error"
+                showIcon
+                description="Invalid username or password."
+              />
+            ) : null}
+          </div>
           <div className="form-actions">
             <Button
               type="primary"
               className="width-150 mr-4"
               htmlType="submit"
               loading={isSubmitForm}
-              
             >
               Login
             </Button>

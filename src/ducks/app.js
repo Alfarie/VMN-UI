@@ -1,18 +1,7 @@
-import {
-  createAction,
-  createReducer
-} from 'redux-act'
-import {
-  push
-} from 'react-router-redux'
-import {
-  pendingTask,
-  begin,
-  end
-} from 'react-redux-spinner'
-import {
-  notification
-} from 'antd'
+import { createAction, createReducer } from 'redux-act'
+import { push } from 'react-router-redux'
+import { pendingTask, begin, end } from 'react-redux-spinner'
+import { notification } from 'antd'
 import axios from '../lib/axios'
 const REDUCER = 'app'
 const NS = `@@${REDUCER}/`
@@ -95,30 +84,29 @@ export const initAuth = roles => (dispatch, getState) => {
   }
 }
 
-
 export async function login(username, password, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
 
   try {
     const res = await axios.post('/auth/signin', {
       username,
-      password
+      password,
     })
     if (res.status === 200) {
-      const { data } = res;
-      window.localStorage.setItem('app.Authorization', data.tokenId);
+      const { data } = res
+      window.localStorage.setItem('app.Authorization', data.tokenId)
       window.localStorage.setItem('app.Role', 'administrator')
       dispatch(_setHideLogin(true))
       dispatch(push(homePage))
       notification.open({
         type: 'success',
         message: 'You have successfully logged in!',
-        description: 'Welcome to Volume measurement network project. Currently projects are still under development.',
+        description:
+          'Welcome to Volume measurement network project. Currently projects are still under development.',
       })
       return true
     }
-  }
-  catch (ex) {
+  } catch (ex) {
     dispatch(push('/login'))
     dispatch(_setFrom(''))
     return false
@@ -170,95 +158,94 @@ const initialState = {
 
   statusPage: {
     title: 'Status Info',
-    description: 'this is Status Info'
-  }
+    description: 'this is Status Info',
+  },
 }
 
-export default createReducer({
-  // [reducer name] : create by createReducer (redux-act)
-  [_setFrom]: (state, from) => {
-    return ({
-      ...state,
-      from
-    })
-  },
-  [_setLoading]: (state, isLoading) => ({
-    ...state,
-    isLoading
-  }),
-  [_setHideLogin]: (state, isHideLogin) => ({
-    ...state,
-    isHideLogin
-  }),
-  [setUpdatingContent]: (state, isUpdatingContent) => ({
-    ...state,
-    isUpdatingContent
-  }),
-  [setUserState]: (state, {
-    userState
-  }) => ({
-    ...state,
-    userState
-  }),
-  [setLayoutState]: (state, param) => {
-    const layoutState = {
-      ...state.layoutState,
-      ...param
-    }
-    const newState = {
-      ...state,
-      layoutState
-    }
-    window.localStorage.setItem('app.layoutState', JSON.stringify(newState.layoutState))
-    return newState
-  },
-  [setActiveDialog]: (state, activeDialog) => {
-    const result = {
-      ...state,
-      activeDialog
-    }
-    if (activeDialog !== '') {
-      const id = activeDialog
-      result.dialogForms = {
-        ...state.dialogForms,
-        [id]: true
+export default createReducer(
+  {
+    // [reducer name] : create by createReducer (redux-act)
+    [_setFrom]: (state, from) => {
+      return {
+        ...state,
+        from,
       }
-    }
-    return result
-  },
-  [deleteDialogForm]: (state, id) => {
-    const dialogForms = {
-      ...state.dialogForms
-    }
-    delete dialogForms[id]
-    return {
+    },
+    [_setLoading]: (state, isLoading) => ({
       ...state,
-      dialogForms
-    }
-  },
-  [addSubmitForm]: (state, id) => {
-    const submitForms = {
-      ...state.submitForms,
-      [id]: true
-    }
-    return {
+      isLoading,
+    }),
+    [_setHideLogin]: (state, isHideLogin) => ({
       ...state,
-      submitForms
-    }
-  },
-  [deleteSubmitForm]: (state, id) => {
-    const submitForms = {
-      ...state.submitForms
-    }
-    delete submitForms[id]
-    return {
+      isHideLogin,
+    }),
+    [setUpdatingContent]: (state, isUpdatingContent) => ({
       ...state,
-      submitForms
-    }
+      isUpdatingContent,
+    }),
+    [setUserState]: (state, { userState }) => ({
+      ...state,
+      userState,
+    }),
+    [setLayoutState]: (state, param) => {
+      const layoutState = {
+        ...state.layoutState,
+        ...param,
+      }
+      const newState = {
+        ...state,
+        layoutState,
+      }
+      window.localStorage.setItem('app.layoutState', JSON.stringify(newState.layoutState))
+      return newState
+    },
+    [setActiveDialog]: (state, activeDialog) => {
+      const result = {
+        ...state,
+        activeDialog,
+      }
+      if (activeDialog !== '') {
+        const id = activeDialog
+        result.dialogForms = {
+          ...state.dialogForms,
+          [id]: true,
+        }
+      }
+      return result
+    },
+    [deleteDialogForm]: (state, id) => {
+      const dialogForms = {
+        ...state.dialogForms,
+      }
+      delete dialogForms[id]
+      return {
+        ...state,
+        dialogForms,
+      }
+    },
+    [addSubmitForm]: (state, id) => {
+      const submitForms = {
+        ...state.submitForms,
+        [id]: true,
+      }
+      return {
+        ...state,
+        submitForms,
+      }
+    },
+    [deleteSubmitForm]: (state, id) => {
+      const submitForms = {
+        ...state.submitForms,
+      }
+      delete submitForms[id]
+      return {
+        ...state,
+        submitForms,
+      }
+    },
+    [setStatusPage]: (state, statusPage) => {
+      return { ...state, statusPage }
+    },
   },
-  [setStatusPage]: (state, statusPage) => {
-    return { ...state, statusPage }
-  }
-},
   initialState,
 )
