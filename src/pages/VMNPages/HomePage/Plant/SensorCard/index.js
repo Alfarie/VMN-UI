@@ -25,8 +25,8 @@ class SensorCard extends React.Component {
   }
 
   showVolume() {
-    const { volume } = this.props.value
     const { numberOfPlant } = this.props
+    const { volume } = this.props.value
     return (
       <Progress
         type="dashboard"
@@ -41,12 +41,13 @@ class SensorCard extends React.Component {
   }
 
   showPercent() {
-    const currentConsume = (this.props.currentConsume * 1000).toFixed(0)
+    const totalConsume = (this.props.totalConsume * 1000).toFixed(0)
+    const { numberOfPlant } = this.props
     const { volume } = this.props.value
     return (
       <Progress
         type="dashboard"
-        percent={(volume * 100) / currentConsume}
+        percent={(volume * 100) / numberOfPlant / totalConsume}
         strokeColor="#42ebf4"
         width={60}
         status="active"

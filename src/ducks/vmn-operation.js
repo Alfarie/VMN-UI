@@ -18,9 +18,9 @@ const initState = {
     'measurement-time': ['06:00', '17:00'],
   },
   'supply-water': [200, 0, 0, 0],
-  'number-plant': [10, 1, 1, 1, 1, 1, 1, 1],
-  'number-drippers': [10, 0, 0, 0, 0, 0, 0, 0],
-  'water-flow': [0.745, 0, 0, 0, 0, 0, 0, 0],
+  'number-plant': [10, 10, 10, 10, 10, 10, 10, 10],
+  'number-drippers': [10, 10, 10, 10, 10, 10, 10, 10],
+  'water-flow': [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
   'station-name': ['A1', 'B1', 'A2', 'B2', 'A3', 'B3', 'A4', 'B4'],
 }
 

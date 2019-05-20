@@ -31,21 +31,25 @@ class Plant extends React.Component {
   }
 
   getPercentDrain = () => {
-    const { control, flowRate, numberPlants, datetime, dripper} = this.props
+    const { control, flowRate, numberPlants, datetime, dripper } = this.props
     const flowRateLS = flowRate.map(flow => flow * 0.000277777778)
 
-    const timersList = control.map(({timer}) => 'list' in timer ? timer.list : [])
-      .reduce((p, c) => ([...p, c, c]), [])
+    const timersList = control
+      .map(({ timer }) => ('list' in timer ? timer.list : []))
+      .reduce((p, c) => [...p, c, c], [])
 
-    const totalSecond = timersList.map(list => (list.reduce( (p, c) => p + c[1], 0)))
-    const totalConsume = totalSecond.map( (sec, ind) => sec * flowRateLS[ind] * dripper[ind]/ numberPlants[ind])
+    const totalSecond = timersList.map(list => list.reduce((p, c) => p + c[1], 0))
+    const totalConsume = totalSecond.map(
+      (sec, ind) => (sec * flowRateLS[ind] * dripper[ind]) / numberPlants[ind],
+    )
 
     const currentMin = moment(datetime).hour() * 60 + moment(datetime).minute()
     const currentSecond = timersList.map(list =>
-      list.filter( times => times[0] <= currentMin)
-        .reduce( (p, c) => p + c[1], 0)
+      list.filter(times => times[0] <= currentMin).reduce((p, c) => p + c[1], 0),
     )
-    const currentConsume = currentSecond.map( (sec, ind) =>  sec * flowRateLS[ind] * dripper[ind] / numberPlants[ind])
+    const currentConsume = currentSecond.map(
+      (sec, ind) => (sec * flowRateLS[ind] * dripper[ind]) / numberPlants[ind],
+    )
     this.setState({ totalConsume, currentConsume })
   }
 
@@ -139,7 +143,8 @@ class Plant extends React.Component {
     return (
       <div>
         <div className="row">
-          <SensorCard id={stationName[0]}
+          <SensorCard
+            id={stationName[0]}
             numberOfPlant={numberPlants[0]}
             value={nodes[1]}
             mode={this.state.mode}

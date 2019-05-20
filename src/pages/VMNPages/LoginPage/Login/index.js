@@ -89,8 +89,8 @@ class Login extends React.Component {
             </li>
           </ul>
         </div>
-        <div style={{position: 'fixed', bottom: 0, right: 0}}>
-          <span style={{color: 'white'}}>version 1.0.2</span>
+        <div style={{ position: 'fixed', bottom: 0, right: 0 }}>
+          <span style={{ color: 'white' }}>version 1.0.4</span>
         </div>
       </div>
     )
