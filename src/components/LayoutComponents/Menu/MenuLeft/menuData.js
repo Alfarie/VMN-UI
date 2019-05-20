@@ -1,9 +1,21 @@
 export default [
   {
-    title: 'MONITORING',
-    key: 'MonitoringPage',
-    url: '/home/plant',
-    icon: 'icmn icmn-display',
+    title: 'HOME',
+    key: 'summary',
+    children: [
+      {
+        title: 'MONITORING',
+        key: 'MonitoringPage',
+        url: '/home/plant',
+        icon: 'icmn icmn-display',
+      },
+      {
+        title: 'SUMMARY',
+        key: 'summarypage',
+        url: '/summary',
+        icon: 'icmn icmn-stats-bars',
+      },
+    ],
   },
   {
     divider: true,
@@ -13,7 +25,7 @@ export default [
     key: 'Settings',
     children: [
       {
-        title: 'NVM SETTING',
+        title: 'VMN SETTING',
         key: 'nvm-setting',
         url: '/setting/nvm-setting',
         icon: 'icmn icmn-cogs',
@@ -35,8 +47,20 @@ export default [
   {
     title: 'CONTROL',
     key: 'ControlPage',
-    url: '/home/plant',
-    icon: 'icmn icmn-equalizer',
+    children: [
+      {
+        title: 'CONTROL',
+        key: 'control',
+        url: '/control/control',
+        icon: 'icmn icmn-equalizer',
+      },
+      {
+        title: 'PRE SETTING',
+        key: 'pre-setting',
+        url: '/control/preset',
+        icon: 'icmn icmn-tree',
+      }
+    ],
   },
   {
     divider: true,

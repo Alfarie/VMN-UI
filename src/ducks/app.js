@@ -87,14 +87,7 @@ export const initAuth = roles => (dispatch, getState) => {
 export async function login(username, password, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
 
-  try {
-    const res = await axios.post('/auth/signin', {
-      username,
-      password,
-    })
-    if (res.status === 200) {
-      const { data } = res
-      window.localStorage.setItem('app.Authorization', data.tokenId)
+  window.localStorage.setItem('app.Authorization','test')
       window.localStorage.setItem('app.Role', 'administrator')
       dispatch(_setHideLogin(true))
       dispatch(push(homePage))
@@ -105,12 +98,31 @@ export async function login(username, password, dispatch) {
           'Welcome to Volume measurement network project. Currently projects are still under development.',
       })
       return true
-    }
-  } catch (ex) {
-    dispatch(push('/login'))
-    dispatch(_setFrom(''))
-    return false
-  }
+
+  // try {
+  //   const res = await axios.post('/auth/signin', {
+  //     username,
+  //     password,
+  //   })
+  //   if (res.status === 200) {
+  //     const { data } = res
+  //     window.localStorage.setItem('app.Authorization', data.tokenId)
+  //     window.localStorage.setItem('app.Role', 'administrator')
+  //     dispatch(_setHideLogin(true))
+  //     dispatch(push(homePage))
+  //     notification.open({
+  //       type: 'success',
+  //       message: 'You have successfully logged in!',
+  //       description:
+  //         'Welcome to Volume measurement network project. Currently projects are still under development.',
+  //     })
+  //     return true
+  //   }
+  // } catch (ex) {
+  //   dispatch(push('/login'))
+  //   dispatch(_setFrom(''))
+  //   return false
+  // }
 }
 
 export const logout = () => (dispatch, getState) => {

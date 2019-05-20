@@ -29,6 +29,9 @@ const loadableRoutes = {
   '/home/plant': {
     component: loadable(() => import('pages/VMNPages/HomePage/HomePage')),
   },
+  '/summary': {
+    component: loadable(() => import('pages/VMNPages/SummaryPage')),
+  },
   '/setting/nvm-setting': {
     component: loadable(() => import('pages/VMNPages/SettingPage/SettingPage')),
   },
@@ -44,10 +47,16 @@ const loadableRoutes = {
   '/setting/datetime': {
     component: loadable(() => import('pages/VMNPages/SettingPage/SettingPage')),
   },
+  '/control/control': {
+    component: loadable(() => import('pages/VMNPages/ControlPage')),
+  },
+  
+  '/control/preset': {
+    component: loadable(() => import('pages/VMNPages/PresetPage')),
+  },
   '/datalogger': {
     component: loadable(() => import('pages/VMNPages/DataLogger')),
   },
-
   '/dashboard/alpha': {
     component: loadable(() => import('pages/DefaultPages/HomePage')),
   },

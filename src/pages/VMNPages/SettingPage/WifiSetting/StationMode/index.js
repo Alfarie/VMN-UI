@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, Input, Select } from 'antd'
+import _ from 'lodash'
 import { connect } from 'react-redux'
 import { getWifi, STARTSTA_REDUCER, startSta, REFRESH_WIFI_REDUCER } from 'ducks/wifi'
 import RefreshButton from 'components/VMNComponents/RefreshButton'
@@ -30,6 +31,7 @@ class ApMode extends React.Component {
 
   listWifis = () => {
     const { wifiList } = this.props
+    if(_.isNil(wifiList) || !Array.isArray(wifiList)) return null
     return wifiList.map(wifi => (
       <Option value={wifi.ssid} key={wifi.ssid}>
         {wifi.ssid} ({wifi.quality}%)

@@ -1,1 +1,1 @@
-Clean UI Admin Template React
+VMN Project Admin Template React

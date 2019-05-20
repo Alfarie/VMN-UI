@@ -28,7 +28,7 @@ class TopBar extends React.Component {
           </span>
         </div>
         <div className="topbar__right">
-          <HomeMenu />
+          {/* <HomeMenu /> */}
           <ProfileMenu />
         </div>
       </div>

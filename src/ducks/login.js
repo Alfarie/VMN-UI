@@ -10,6 +10,8 @@ export const submit = ({ username, password }: { username: string, password: str
 ) => {
   dispatch(app.addSubmitForm(REDUCER))
   let isLoggined = await app.login(username, password, dispatch)
+  // let isLoggined = true;
+  // console.log(isLoggined)
 
   if (isLoggined) {
     dispatch(loginFail(false))

@@ -31,7 +31,7 @@ export const startAp = (ssid, password) => async (dispatch, getState) => {
 export const startSta = (ssid, password) => async (dispatch, getState) => {
   dispatch(app.addSubmitForm(STARTSTA_REDUCER))
   try {
-    // const res = await axios.post('http://smartgrobot.local:3000/wifi/stamode', {ssid,password});
+
     const res = await axios.post('/wifi/stamode', { ssid, password })
     setTimeout(() => {
       dispatch(
@@ -51,7 +51,7 @@ export const startSta = (ssid, password) => async (dispatch, getState) => {
 export const getWifi = () => async (dispatch, getState) => {
   dispatch(app.addSubmitForm(REFRESH_WIFI_REDUCER))
   try {
-    // const res = await axios.get('http://smartgrobot.local:3000/wifi/scan');
+
     const res = await axios.get('/wifi/scan')
 
     const { data } = res.data

@@ -14,7 +14,8 @@ const mapStateToProps = state => {
 export default class Graph extends Component {
   craftStringData = () => {
     const { sensor, loggerPage } = this.props
-    if (loggerPage.length <= 0) return
+    if (loggerPage.length <= 0) return false
+
     var strData = 'Date,' + sensor + '\n'
     const date = moment(loggerPage[0].datetime).format('MMM Do YYYY')
     loggerPage.forEach(log => {
@@ -27,7 +28,9 @@ export default class Graph extends Component {
   }
 
   updateGraph = () => {
-    new Dygraph(this.refs.chart, this.craftStringData(), {
+    const data = this.craftStringData()
+    if(!data) return
+    new Dygraph(this.refs.chart,data, {
       customBars: true,
       // title: 'Sensors in New York vs. San Francisco',
       ylabel: 'Temperature (F)',

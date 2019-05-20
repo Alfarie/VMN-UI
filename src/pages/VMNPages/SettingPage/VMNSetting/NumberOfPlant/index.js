@@ -12,7 +12,7 @@ const mapStateToProps = state => {
     loading: state.app.submitForms['operation'],
   }
 }
-
+const label = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'];
 @connect(mapStateToProps)
 class NumberOfPlant extends React.Component {
   getFields() {
@@ -23,7 +23,7 @@ class NumberOfPlant extends React.Component {
       const rowName = i < 4 ? `A${i + 1}` : `B${i - 3}`
       children.push(
         <Col span={6} key={i} style={{ display: i < count ? 'block' : 'none' }}>
-          <FormItem label={`${rowName}`}>
+          <FormItem label={`${label[i]}`}>
             {getFieldDecorator(`NOP${i}`)(<InputNumber placeholder="Number of plant" />)}
           </FormItem>
         </Col>,

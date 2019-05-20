@@ -3,11 +3,10 @@ import OperationSetting from './OperationSetting'
 import NumberOfPlant from './NumberOfPlant'
 import NumberOfDrippers from './NumberOfDrippers'
 import WaterFlowOfDrippers from './WaterFlowOfDrippers'
-import SupplyWater from './SupplyWater'
+import StationName from './StationName'
 import SwipeableViews from 'react-swipeable-views'
 import { connect } from 'react-redux'
 import { _setOperation, getOperation } from 'ducks/vmn-operation'
-import * as app from 'ducks/app'
 import { BrowserView, MobileView } from 'react-device-detect'
 const mapStateToProps = (state, props) => ({
   operation: state.operation,
@@ -29,10 +28,10 @@ class VMNSetting extends React.Component {
     return (
       <SwipeableViews>
         <OperationSetting data={operation['operation']} onSubmit={this.onSubmit} />
-        <SupplyWater data={operation['supply-water']} onSubmit={this.onSubmit} />
+        <StationName data={operation['station-name']} onSubmit={this.onSubmit} />
+        <WaterFlowOfDrippers data={operation['water-flow']} onSubmit={this.onSubmit} />
         <NumberOfPlant data={operation['number-plant']} onSubmit={this.onSubmit} />
         <NumberOfDrippers data={operation['number-drippers']} onSubmit={this.onSubmit} />
-        <WaterFlowOfDrippers data={operation['water-flow']} onSubmit={this.onSubmit} />
       </SwipeableViews>
     )
   }
@@ -42,9 +41,8 @@ class VMNSetting extends React.Component {
       <div className="row">
         <div className="col col-lg-6 col-xs-12">
           <OperationSetting data={operation['operation']} onSubmit={this.onSubmit} />
-        </div>
-        <div className="col col-lg-6 col-xs-12">
-          <SupplyWater data={operation['supply-water']} onSubmit={this.onSubmit} />
+        </div><div className="col col-lg-6 col-xs-12">
+          <StationName data={operation['station-name']} onSubmit={this.onSubmit} />
         </div>
         <div className="col col-lg-6 col-xs-12">
           <NumberOfPlant data={operation['number-plant']} onSubmit={this.onSubmit} />

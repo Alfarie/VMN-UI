@@ -8,18 +8,20 @@ const supplyWater = 'supply-water'
 const mapStateToProps = (state, props) => {
   return {
     [supplyWater]: state.operation['supply-water'],
+    operation: state.operation.operation
   }
 }
 @connect(mapStateToProps)
 class Supply extends React.Component {
   render() {
+    const { operation } = this.props
     return (
       <div>
         <div className="utils__title utils__title--flat mb-3">
-          <span className="text-uppercase font-size-16"> Operation </span>
+          <span className="text-uppercase font-size-16"> Operator: <strong>{operation['operator-name']}</strong></span>
         </div>
         <SupplyConductivity />
-        <SupplyWater supplyWater={this.props[supplyWater]} />
+
       </div>
     )
   }

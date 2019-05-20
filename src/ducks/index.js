@@ -13,6 +13,9 @@ import operation from './vmn-operation'
 import wifi from './wifi'
 import realTime from './real-time'
 import logger from './logger'
+import control from './control'
+import preset from './preset'
+
 export const reducer = combineReducers({
   routing: routerReducer,
   pendingTasks: pendingTasksReducer,
@@ -22,6 +25,8 @@ export const reducer = combineReducers({
   wifi,
   realTime,
   logger,
+  preset,
+  control
 })
 
 export const history = createHistory()

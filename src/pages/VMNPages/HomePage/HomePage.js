@@ -11,20 +11,24 @@ import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom
 
 import { connect } from 'react-redux'
 import { getOperation } from 'ducks/vmn-operation'
+import { _getControl } from 'ducks/control'
+import { getPreset } from 'ducks/preset'
 const mapStateToProps = (state, props) => ({})
 
 @connect(mapStateToProps)
 class HomePage extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props
-    console.log('component did mount')
+    console.log('[Info] Retrive data from MPU');
     dispatch(getOperation())
+    dispatch(_getControl())
+    dispatch(getPreset())
+
   }
 
   render() {
-    const ButtonGroup = Button.Group
+
     const props = this.props
-    // console.log(props)
     const path = props.location.pathname
     if (path === '/') {
       return <Redirect to="/home/plant" />
@@ -32,20 +36,8 @@ class HomePage extends React.Component {
     return (
       <Page {...props}>
         <Helmet title="Monitoring" />
-
-        <div className="right-div">
-          <ButtonGroup>
-            <Link to="/home/plant">
-              <Button type="default">Plant</Button>
-            </Link>
-            <Link to="/home/supply">
-              <Button type="default">Supply</Button>
-            </Link>
-          </ButtonGroup>
-        </div>
-
-        <Route path="/home/supply" component={Supply} />
-        <Route path="/home/plant" component={Plant} />
+        <Supply />
+        <Plant />
       </Page>
     )
   }

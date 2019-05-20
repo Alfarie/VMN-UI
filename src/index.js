@@ -31,7 +31,7 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <LocaleProvider locale={enGB}>
         <div>
-          <Helmet titleTemplate="Clean UI - %s" />
+          <Helmet titleTemplate="VMN - %s" />
           <Layout />
         </div>
       </LocaleProvider>
