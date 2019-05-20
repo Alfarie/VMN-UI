@@ -41,7 +41,8 @@ class VMNSetting extends React.Component {
       <div className="row">
         <div className="col col-lg-6 col-xs-12">
           <OperationSetting data={operation['operation']} onSubmit={this.onSubmit} />
-        </div><div className="col col-lg-6 col-xs-12">
+        </div>
+        <div className="col col-lg-6 col-xs-12">
           <StationName data={operation['station-name']} onSubmit={this.onSubmit} />
         </div>
         <div className="col col-lg-6 col-xs-12">

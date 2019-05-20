@@ -9,7 +9,7 @@ const mapStateToProps = state => {
     loading: state.app.submitForms['operation'],
   }
 }
-const label = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'];
+const label = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2']
 @connect(mapStateToProps)
 class StationName extends React.Component {
   getFields() {
@@ -21,7 +21,13 @@ class StationName extends React.Component {
       children.push(
         <Col span={12} key={i} style={{ display: i < count ? 'block' : 'none' }}>
           <FormItem label={`${label[i]}`}>
-            {getFieldDecorator(`NOD${i}`)(<Input maxLength={10} prefix={<Icon type="api" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Station Name" />)}
+            {getFieldDecorator(`NOD${i}`)(
+              <Input
+                maxLength={10}
+                prefix={<Icon type="api" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="Station Name"
+              />,
+            )}
           </FormItem>
         </Col>,
       )
@@ -69,7 +75,7 @@ class StationName extends React.Component {
 const WrappedStationName = Form.create({
   mapPropsToFields(props) {
     var config = {}
-    if(props.data === undefined) return config
+    if (props.data === undefined) return config
     props.data.forEach((val, ind) => {
       config = {
         ...config,

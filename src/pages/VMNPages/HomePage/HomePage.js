@@ -19,15 +19,13 @@ const mapStateToProps = (state, props) => ({})
 class HomePage extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props
-    console.log('[Info] Retrive data from MPU');
+    console.log('[Info] Retrive data from MPU')
     dispatch(getOperation())
     dispatch(_getControl())
     dispatch(getPreset())
-
   }
 
   render() {
-
     const props = this.props
     const path = props.location.pathname
     if (path === '/') {

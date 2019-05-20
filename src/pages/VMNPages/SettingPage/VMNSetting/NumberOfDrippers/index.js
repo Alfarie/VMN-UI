@@ -12,7 +12,7 @@ const mapStateToProps = state => {
     loading: state.app.submitForms['operation'],
   }
 }
-const label = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'];
+const label = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2']
 @connect(mapStateToProps)
 class NumberOfDrippers extends React.Component {
   getFields() {

@@ -31,7 +31,7 @@ class ApMode extends React.Component {
 
   listWifis = () => {
     const { wifiList } = this.props
-    if(_.isNil(wifiList) || !Array.isArray(wifiList)) return null
+    if (_.isNil(wifiList) || !Array.isArray(wifiList)) return null
     return wifiList.map(wifi => (
       <Option value={wifi.ssid} key={wifi.ssid}>
         {wifi.ssid} ({wifi.quality}%)

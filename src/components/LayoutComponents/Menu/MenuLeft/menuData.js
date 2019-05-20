@@ -59,7 +59,7 @@ export default [
         key: 'pre-setting',
         url: '/control/preset',
         icon: 'icmn icmn-tree',
-      }
+      },
     ],
   },
   {

@@ -50,7 +50,7 @@ const loadableRoutes = {
   '/control/control': {
     component: loadable(() => import('pages/VMNPages/ControlPage')),
   },
-  
+
   '/control/preset': {
     component: loadable(() => import('pages/VMNPages/PresetPage')),
   },

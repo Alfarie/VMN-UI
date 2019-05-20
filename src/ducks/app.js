@@ -87,17 +87,17 @@ export const initAuth = roles => (dispatch, getState) => {
 export async function login(username, password, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
 
-  window.localStorage.setItem('app.Authorization','test')
-      window.localStorage.setItem('app.Role', 'administrator')
-      dispatch(_setHideLogin(true))
-      dispatch(push(homePage))
-      notification.open({
-        type: 'success',
-        message: 'You have successfully logged in!',
-        description:
-          'Welcome to Volume measurement network project. Currently projects are still under development.',
-      })
-      return true
+  window.localStorage.setItem('app.Authorization', 'test')
+  window.localStorage.setItem('app.Role', 'administrator')
+  dispatch(_setHideLogin(true))
+  dispatch(push(homePage))
+  notification.open({
+    type: 'success',
+    message: 'You have successfully logged in!',
+    description:
+      'Welcome to Volume measurement network project. Currently projects are still under development.',
+  })
+  return true
 
   // try {
   //   const res = await axios.post('/auth/signin', {

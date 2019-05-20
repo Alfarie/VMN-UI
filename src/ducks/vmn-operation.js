@@ -21,7 +21,7 @@ const initState = {
   'number-plant': [1, 1, 1, 1, 1, 1, 1, 1],
   'number-drippers': [0, 0, 0, 0, 0, 0, 0, 0],
   'water-flow': [0, 0, 0, 0, 0, 0, 0, 0],
-  'station-name': ['A1', 'B1', 'A2', 'B2', 'A3', 'B3', 'A4', 'B4']
+  'station-name': ['A1', 'B1', 'A2', 'B2', 'A3', 'B3', 'A4', 'B4'],
 }
 
 export const getOperation = () => async (dispatch, getState) => {
@@ -30,48 +30,47 @@ export const getOperation = () => async (dispatch, getState) => {
   dispatch(setOperation(res.data))
 }
 export const supplyCalculation = () => async (dispatch, getState) => {
-  let data = await Promise.all([axios.get('/operation'), axios.get('/control')]);
-  const operation = data[0].data;
-  const control = data[1].data;
+  let data = await Promise.all([axios.get('/operation'), axios.get('/control')])
+  const operation = data[0].data
+  const control = data[1].data
   let flowRate = operation['water-flow']
 
   const flowRateLS = flowRate.map(flow => flow * 0.000277777778)
 
   // total consume calculation
   var totalSecond = control.map(ctrl => {
-    var second = 0;
+    var second = 0
     ctrl.timer.list.forEach((list, index) => {
       second += list[1]
     })
-    return [second, second];
-  });
+    return [second, second]
+  })
   totalSecond = JSON.parse('[' + totalSecond.join() + ']')
-  var totalSupply = [0, 0, 0, 0, 0, 0, 0, 0];
+  var totalSupply = [0, 0, 0, 0, 0, 0, 0, 0]
 
   for (var i = 0; i < totalSupply.length; i += 1) {
-    totalSupply[i] = totalSecond[i] * flowRateLS[i] * 1000;
+    totalSupply[i] = totalSecond[i] * flowRateLS[i] * 1000
   }
 
   // current consume calculation
   //get datetime to current min
-  const currentTime = moment();
-  const currentMin = currentTime.hour() * 60 + currentTime.minute();
+  const currentTime = moment()
+  const currentMin = currentTime.hour() * 60 + currentTime.minute()
   var currentSecond = control.map(ctrl => {
-    var second = 0;
+    var second = 0
     ctrl.timer.list.forEach((list, index) => {
-      if (list[0] >= currentMin) return;
+      if (list[0] >= currentMin) return
       second += list[1]
     })
-    return [second, second];
-  });
+    return [second, second]
+  })
   currentSecond = JSON.parse('[' + currentSecond.join() + ']')
-  var currentSupply = [0, 0, 0, 0, 0, 0, 0, 0];
+  var currentSupply = [0, 0, 0, 0, 0, 0, 0, 0]
   for (i = 0; i < currentSupply.length; i += 1) {
-    currentSupply[i] = currentSecond[i] * flowRateLS[i] * 1000;
+    currentSupply[i] = currentSecond[i] * flowRateLS[i] * 1000
   }
 
-
-  dispatch(setSupply({currentSupply, totalSupply}))
+  dispatch(setSupply({ currentSupply, totalSupply }))
 }
 
 export const setDateTime = ({ date, time }) => async (dispatch, getState) => {
@@ -93,7 +92,7 @@ export const _setOperation = payload => async (dispatch, getState) => {
     dispatch(setOperation(payload))
     const { operation } = getState()
     const res = await axios.post('/operation', operation)
-    console.log(res.data);
+    console.log(res.data)
 
     setTimeout(() => {
       dispatch(app.deleteSubmitForm('operation'))
@@ -111,7 +110,7 @@ export const _setOperation = payload => async (dispatch, getState) => {
 export default createReducer(
   {
     [setOperation]: (state, payload) => ({ ...state, ...payload }),
-    [setSupply]: (state, payload) => ({...state,...payload}),
+    [setSupply]: (state, payload) => ({ ...state, ...payload }),
   },
   initState,
 )

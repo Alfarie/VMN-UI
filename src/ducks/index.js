@@ -26,7 +26,7 @@ export const reducer = combineReducers({
   realTime,
   logger,
   preset,
-  control
+  control,
 })
 
 export const history = createHistory()

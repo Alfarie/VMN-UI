@@ -29,8 +29,8 @@ export default class Graph extends Component {
 
   updateGraph = () => {
     const data = this.craftStringData()
-    if(!data) return
-    new Dygraph(this.refs.chart,data, {
+    if (!data) return
+    new Dygraph(this.refs.chart, data, {
       customBars: true,
       // title: 'Sensors in New York vs. San Francisco',
       ylabel: 'Temperature (F)',
