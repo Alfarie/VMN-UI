@@ -15,6 +15,7 @@ const mapStateToProps = (state, props) => {
     datetime,
     flowRate: state.operation['water-flow'],
     stationName: state.operation['station-name'],
+    dripper: state.operation['number-drippers'],
     numberPlants: state.operation['number-plant'],
     operation: state.operation.operation,
   }
@@ -30,49 +31,28 @@ class Plant extends React.Component {
   }
 
   getPercentDrain = () => {
-    const { control, flowRate, numberPlants } = this.props
+    const { control, flowRate, numberPlants, datetime, dripper} = this.props
     const flowRateLS = flowRate.map(flow => flow * 0.000277777778)
 
-    // total consume calculation
-    var totalSecond = control.map(ctrl => {
-      var second = 0
-      ctrl.timer.list.forEach((list, index) => {
-        second += list[1]
-      })
-      return [second, second]
-    })
-    totalSecond = JSON.parse('[' + totalSecond.join() + ']')
-    var totalConsume = [0, 0, 0, 0, 0, 0, 0, 0]
+    const timersList = control.map(({timer}) => 'list' in timer ? timer.list : [])
+      .reduce((p, c) => ([...p, c, c]), [])
 
-    for (var i = 0; i < totalConsume.length; i += 1) {
-      totalConsume[i] = (totalSecond[i] * flowRateLS[i]) / numberPlants[i]
-    }
+    const totalSecond = timersList.map(list => (list.reduce( (p, c) => p + c[1], 0)))
+    const totalConsume = totalSecond.map( (sec, ind) => sec * flowRateLS[ind] * dripper[ind]/ numberPlants[ind])
 
-    // current consume calculation
-    //get datetime to current min
-    const currentTime = moment(this.props.datetime)
-    const currentMin = currentTime.hour() * 60 + currentTime.minute()
-    var currentSecond = control.map(ctrl => {
-      var second = 0
-      ctrl.timer.list.forEach((list, index) => {
-        if (list[0] >= currentMin) return
-        second += list[1]
-      })
-      return [second, second]
-    })
-    currentSecond = JSON.parse('[' + currentSecond.join() + ']')
-    var currentConsume = [0, 0, 0, 0, 0, 0, 0, 0]
-    for (i = 0; i < currentConsume.length; i += 1) {
-      currentConsume[i] = (currentSecond[i] * flowRateLS[i]) / numberPlants[i]
-    }
-
+    const currentMin = moment(datetime).hour() * 60 + moment(datetime).minute()
+    const currentSecond = timersList.map(list =>
+      list.filter( times => times[0] <= currentMin)
+        .reduce( (p, c) => p + c[1], 0)
+    )
+    const currentConsume = currentSecond.map( (sec, ind) =>  sec * flowRateLS[ind] * dripper[ind] / numberPlants[ind])
     this.setState({ totalConsume, currentConsume })
   }
 
   componentDidMount() {
     setTimeout(() => {
       this.getPercentDrain()
-    }, 3000)
+    }, 1000)
   }
 
   renderMobile() {
@@ -159,8 +139,7 @@ class Plant extends React.Component {
     return (
       <div>
         <div className="row">
-          <SensorCard
-            id={stationName[0]}
+          <SensorCard id={stationName[0]}
             numberOfPlant={numberPlants[0]}
             value={nodes[1]}
             mode={this.state.mode}
@@ -178,7 +157,7 @@ class Plant extends React.Component {
           <SensorCard
             id={stationName[1]}
             numberOfPlant={numberPlants[1]}
-            value={nodes[5]}
+            value={nodes[2]}
             mode={this.state.mode}
             totalConsume={totalConsume[1]}
             currentConsume={currentConsume[1]}
@@ -186,7 +165,7 @@ class Plant extends React.Component {
           <SensorCard
             id={stationName[3]}
             numberOfPlant={numberPlants[3]}
-            value={nodes[7]}
+            value={nodes[4]}
             mode={this.state.mode}
             totalConsume={totalConsume[3]}
             currentConsume={currentConsume[3]}
@@ -196,7 +175,7 @@ class Plant extends React.Component {
           <SensorCard
             id={stationName[4]}
             numberOfPlant={numberPlants[4]}
-            value={nodes[2]}
+            value={nodes[5]}
             mode={this.state.mode}
             totalConsume={totalConsume[4]}
             currentConsume={currentConsume[4]}
@@ -204,7 +183,7 @@ class Plant extends React.Component {
           <SensorCard
             id={stationName[6]}
             numberOfPlant={numberPlants[6]}
-            value={nodes[4]}
+            value={nodes[7]}
             mode={this.state.mode}
             totalConsume={totalConsume[6]}
             currentConsume={currentConsume[6]}

@@ -1,8 +1,6 @@
 import React from 'react'
 import LoginForm from './LoginForm'
 import './style.scss'
-import faker from 'faker'
-
 class Login extends React.Component {
   state = {
     backgroundImage: 'url(resources/images/login/6.jpg)',
@@ -90,6 +88,9 @@ class Login extends React.Component {
               <a href="javascript: void(0);">Contacts</a>
             </li>
           </ul>
+        </div>
+        <div style={{position: 'fixed', bottom: 0, right: 0}}>
+          <span style={{color: 'white'}}>version 1.0.2</span>
         </div>
       </div>
     )
