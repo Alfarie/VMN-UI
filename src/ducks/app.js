@@ -2,9 +2,11 @@ import { createAction, createReducer } from 'redux-act'
 import { push } from 'react-router-redux'
 import { pendingTask, begin, end } from 'react-redux-spinner'
 import { notification } from 'antd'
-
+import axios from '../lib/axios'
 const REDUCER = 'app'
 const NS = `@@${REDUCER}/`
+
+const homePage = '/home/plant'
 
 const _setFrom = createAction(`${NS}SET_FROM`)
 const _setLoading = createAction(`${NS}SET_LOADING`)
@@ -17,6 +19,7 @@ export const deleteDialogForm = createAction(`${NS}DELETE_DIALOG_FORM`)
 export const addSubmitForm = createAction(`${NS}ADD_SUBMIT_FORM`)
 export const deleteSubmitForm = createAction(`${NS}DELETE_SUBMIT_FORM`)
 export const setLayoutState = createAction(`${NS}SET_LAYOUT_STATE`)
+export const setStatusPage = createAction(`${NS}SET_STATUS_PAGE`)
 
 export const setLoading = isLoading => {
   const action = _setLoading(isLoading)
@@ -48,7 +51,6 @@ export const initAuth = roles => (dispatch, getState) => {
       role: 'agent',
     },
   }
-
   const setUser = userState => {
     dispatch(
       setUserState({
@@ -58,8 +60,8 @@ export const initAuth = roles => (dispatch, getState) => {
       }),
     )
     if (!roles.find(role => role === userRole)) {
-      if (!(state.routing.location.pathname === '/dashboard/alpha')) {
-        dispatch(push('/dashboard/alpha'))
+      if (!(state.routing.location.pathname === homePage)) {
+        dispatch(push(homePage))
       }
       return Promise.resolve(false)
     }
@@ -82,41 +84,45 @@ export const initAuth = roles => (dispatch, getState) => {
   }
 }
 
-export function login(username, password, dispatch) {
+export async function login(username, password, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
 
-  if (username === 'admin@mediatec.org' && password === '123123') {
-    window.localStorage.setItem('app.Authorization', '')
-    window.localStorage.setItem('app.Role', 'administrator')
-    dispatch(_setHideLogin(true))
-    dispatch(push('/dashboard/alpha'))
-    notification.open({
-      type: 'success',
-      message: 'You have successfully logged in!',
-      description:
-        'Welcome to the Clean UI Admin Template. The Clean UI Admin Template is a complimentary template that empowers developers to make perfect looking and useful apps!',
-    })
-    return true
-  }
+  window.localStorage.setItem('app.Authorization', 'test')
+  window.localStorage.setItem('app.Role', 'administrator')
+  dispatch(_setHideLogin(true))
+  dispatch(push(homePage))
+  notification.open({
+    type: 'success',
+    message: 'You have successfully logged in!',
+    description:
+      'Welcome to Volume measurement network project. Currently projects are still under development.',
+  })
+  return true
 
-  if (username === 'agent@mediatec.org' && password === '123123') {
-    window.localStorage.setItem('app.Authorization', '')
-    window.localStorage.setItem('app.Role', 'agent')
-    dispatch(_setHideLogin(true))
-    dispatch(push('/dashboard/alpha'))
-    notification.open({
-      type: 'success',
-      message: 'You have successfully logged in!',
-      description:
-        'Welcome to the Clean UI Admin Template. The Clean UI Admin Template is a complimentary template that empowers developers to make perfect looking and useful apps!',
-    })
-    return true
-  }
-
-  dispatch(push('/login'))
-  dispatch(_setFrom(''))
-
-  return false
+  // try {
+  //   const res = await axios.post('/auth/signin', {
+  //     username,
+  //     password,
+  //   })
+  //   if (res.status === 200) {
+  //     const { data } = res
+  //     window.localStorage.setItem('app.Authorization', data.tokenId)
+  //     window.localStorage.setItem('app.Role', 'administrator')
+  //     dispatch(_setHideLogin(true))
+  //     dispatch(push(homePage))
+  //     notification.open({
+  //       type: 'success',
+  //       message: 'You have successfully logged in!',
+  //       description:
+  //         'Welcome to Volume measurement network project. Currently projects are still under development.',
+  //     })
+  //     return true
+  //   }
+  // } catch (ex) {
+  //   dispatch(push('/login'))
+  //   dispatch(_setFrom(''))
+  //   return false
+  // }
 }
 
 export const logout = () => (dispatch, getState) => {
@@ -161,42 +167,96 @@ const initialState = {
     email: '',
     role: '',
   },
+
+  statusPage: {
+    title: 'Status Info',
+    description: 'this is Status Info',
+  },
 }
 
 export default createReducer(
   {
-    [_setFrom]: (state, from) => ({ ...state, from }),
-    [_setLoading]: (state, isLoading) => ({ ...state, isLoading }),
-    [_setHideLogin]: (state, isHideLogin) => ({ ...state, isHideLogin }),
-    [setUpdatingContent]: (state, isUpdatingContent) => ({ ...state, isUpdatingContent }),
-    [setUserState]: (state, { userState }) => ({ ...state, userState }),
+    // [reducer name] : create by createReducer (redux-act)
+    [_setFrom]: (state, from) => {
+      return {
+        ...state,
+        from,
+      }
+    },
+    [_setLoading]: (state, isLoading) => ({
+      ...state,
+      isLoading,
+    }),
+    [_setHideLogin]: (state, isHideLogin) => ({
+      ...state,
+      isHideLogin,
+    }),
+    [setUpdatingContent]: (state, isUpdatingContent) => ({
+      ...state,
+      isUpdatingContent,
+    }),
+    [setUserState]: (state, { userState }) => ({
+      ...state,
+      userState,
+    }),
     [setLayoutState]: (state, param) => {
-      const layoutState = { ...state.layoutState, ...param }
-      const newState = { ...state, layoutState }
+      const layoutState = {
+        ...state.layoutState,
+        ...param,
+      }
+      const newState = {
+        ...state,
+        layoutState,
+      }
       window.localStorage.setItem('app.layoutState', JSON.stringify(newState.layoutState))
       return newState
     },
     [setActiveDialog]: (state, activeDialog) => {
-      const result = { ...state, activeDialog }
+      const result = {
+        ...state,
+        activeDialog,
+      }
       if (activeDialog !== '') {
         const id = activeDialog
-        result.dialogForms = { ...state.dialogForms, [id]: true }
+        result.dialogForms = {
+          ...state.dialogForms,
+          [id]: true,
+        }
       }
       return result
     },
     [deleteDialogForm]: (state, id) => {
-      const dialogForms = { ...state.dialogForms }
+      const dialogForms = {
+        ...state.dialogForms,
+      }
       delete dialogForms[id]
-      return { ...state, dialogForms }
+      return {
+        ...state,
+        dialogForms,
+      }
     },
     [addSubmitForm]: (state, id) => {
-      const submitForms = { ...state.submitForms, [id]: true }
-      return { ...state, submitForms }
+      const submitForms = {
+        ...state.submitForms,
+        [id]: true,
+      }
+      return {
+        ...state,
+        submitForms,
+      }
     },
     [deleteSubmitForm]: (state, id) => {
-      const submitForms = { ...state.submitForms }
+      const submitForms = {
+        ...state.submitForms,
+      }
       delete submitForms[id]
-      return { ...state, submitForms }
+      return {
+        ...state,
+        submitForms,
+      }
+    },
+    [setStatusPage]: (state, statusPage) => {
+      return { ...state, statusPage }
     },
   },
   initialState,

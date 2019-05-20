@@ -14,7 +14,10 @@ const mapStateToProps = (state, props) => ({
   userState: state.app.userState,
 })
 
-@connect(mapStateToProps, mapDispatchToProps)
+@connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)
 class ProfileMenu extends React.Component {
   state = {
     count: 7,
@@ -33,32 +36,15 @@ class ProfileMenu extends React.Component {
       <Menu selectable={false}>
         <Menu.Item>
           <div className="rfq__widget__system-status__item">
-            <strong>Hello, {userState.role}</strong>
+            <strong> VMN Network Project</strong>
             <div>
-              <strong>Billing Plan:</strong> Professional
+              <strong>Status:</strong> Pending
               <br />
             </div>
+          </div>
+        </Menu.Item>
+        <Menu.Divider />
 
-            <div>
-              <strong>Role:</strong> {userState.role}
-            </div>
-          </div>
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item>
-          <div className="rfq__widget__system-status__item">
-            <strong>Email:</strong> {userState.email}
-            <br />
-            <strong>Phone:</strong> +1-800-MEDIATEC
-          </div>
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item>
-          <a href="javascript: void(0);">
-            <i className="topbar__dropdownMenuIcon icmn-user" /> Edit Profile
-          </a>
-        </Menu.Item>
-        <Menu.Divider />
         <Menu.Item>
           <a href="javascript: void(0);" onClick={logout}>
             <i className="topbar__dropdownMenuIcon icmn-exit" /> Logout
@@ -75,8 +61,13 @@ class ProfileMenu extends React.Component {
           onVisibleChange={this.addCount}
         >
           <a className="ant-dropdown-link" href="/">
-            <Badge count={count}>
-              <Avatar className="topbar__avatar" shape="square" size="large" icon="user" />
+            <Badge count={0}>
+              <Avatar
+                className="topbar__avatar"
+                shape="square"
+                size="large"
+                src="resources/images/leaf.png"
+              />
             </Badge>
           </a>
         </Dropdown>

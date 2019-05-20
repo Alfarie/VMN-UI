@@ -37,8 +37,8 @@ class AppMenu extends React.Component {
     const { open, isMenuTop } = this.state
     return isMobile ? (
       <DrawerMenu
-        parent={null}
         getContainer={null}
+        level={null}
         open={open}
         onMaskClick={this.toggleOpen}
         onHandleClick={this.toggleOpen}

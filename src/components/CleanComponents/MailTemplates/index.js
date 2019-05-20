@@ -29,7 +29,7 @@ class MailTemplates extends React.Component {
                           <td style={{ verticalAlign: 'top' }}>
                             <img
                               src="resources/images/logo.png"
-                              alt="Clean UI Admin Template"
+                              alt="VMN Project Admin Template"
                               style={{ height: '40px' }}
                             />
                           </td>
@@ -99,7 +99,7 @@ class MailTemplates extends React.Component {
                           Unsubscribe
                         </a>
                         <br />
-                        Powered by Clean UI
+                        Powered by VMN Project
                       </p>
                     </div>
                   </div>
@@ -127,7 +127,7 @@ class MailTemplates extends React.Component {
                           <td style={{ verticalAlign: 'top' }}>
                             <img
                               src="resources/images/logo.png"
-                              alt="Clean UI Admin Template"
+                              alt="VMN Project Admin Template"
                               style={{ height: '40px' }}
                             />
                           </td>
@@ -156,8 +156,8 @@ class MailTemplates extends React.Component {
                                 Password Reset
                               </h5>
                               <p>
-                                Seems like you forgot your password for Clean UI. If this is true,
-                                click below to reset your password.
+                                Seems like you forgot your password for VMN Project. If this is
+                                true, click below to reset your password.
                               </p>
                               <div style={{ textAlign: 'center' }}>
                                 <a
@@ -179,7 +179,9 @@ class MailTemplates extends React.Component {
                                 If you did not forgot your password you can safely ignore his email.
                               </p>
                               <p>
-                                Regards,<br />Mediatec Software
+                                Regards,
+                                <br />
+                                Mediatec Software
                               </p>
                             </td>
                           </tr>
@@ -205,7 +207,7 @@ class MailTemplates extends React.Component {
                           Unsubscribe
                         </a>
                         <br />
-                        Powered by Clean UI
+                        Powered by VMN Project
                       </p>
                     </div>
                   </div>
@@ -239,7 +241,7 @@ class MailTemplates extends React.Component {
                           <td style={{ verticalAlign: 'top' }}>
                             <img
                               src="resources/images/logo.png"
-                              alt="Clean UI Admin Template"
+                              alt="VMN Project Admin Template"
                               style={{ height: '40px' }}
                             />
                           </td>
@@ -625,7 +627,7 @@ class MailTemplates extends React.Component {
                           Unsubscribe
                         </a>
                         <br />
-                        Powered by Clean UI
+                        Powered by VMN Project
                       </p>
                     </div>
                   </div>
@@ -653,7 +655,7 @@ class MailTemplates extends React.Component {
                           <td style={{ verticalAlign: 'top' }}>
                             <img
                               src="resources/images/logo.png"
-                              alt="Clean UI Admin Template"
+                              alt="VMN Project Admin Template"
                               style={{ height: '40px' }}
                             />
                           </td>
@@ -748,7 +750,7 @@ class MailTemplates extends React.Component {
                           Unsubscribe
                         </a>
                         <br />
-                        Powered by Clean UI
+                        Powered by VMN Project
                       </p>
                     </div>
                   </div>
