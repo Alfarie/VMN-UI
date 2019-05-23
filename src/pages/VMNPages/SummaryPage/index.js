@@ -10,11 +10,11 @@ const mapStateToProps = (state, props) => ({})
 @connect(mapStateToProps)
 class HomePage extends React.Component {
   render() {
-    const props = this.props;
+    const props = this.props
     return (
       <Page {...props}>
         <Helmet title="Summary" />
-        <SummaryPage/>
+        <SummaryPage />
       </Page>
     )
   }

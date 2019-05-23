@@ -10,61 +10,56 @@ import TimerPanel from './components/controlComponents/timerPanel'
 import ManualPanel from './components/controlComponents/manualPanel'
 import { setSelectedChannel } from 'ducks/control'
 import { push } from 'react-router-redux'
-import {_getControl} from 'ducks/control';
-import {getPreset} from 'ducks/preset';
-
-
+import { _getControl } from 'ducks/control'
+import { getPreset } from 'ducks/preset'
 
 const mapStateToProps = (state, props) => {
-    return {
-        control: state.control,
-    }
+  return {
+    control: state.control,
+  }
 }
 @connect(mapStateToProps)
 class ControlPage extends React.Component {
-    componentDidMount(){
-        const {dispatch} = this.props;
-        dispatch(_getControl())
-        dispatch(getPreset())
-    }
-    state = {
-        selected: false,
-        mode: 0
-    }
+  componentDidMount() {
+    const { dispatch } = this.props
+    dispatch(_getControl())
+    dispatch(getPreset())
+  }
+  state = {
+    selected: false,
+    mode: 0,
+  }
 
-    onSelect = (ch) => {
-        const { control, dispatch } = this.props
-        this.onModeSelect(control.control[ch - 1].mode)
-        this.props.dispatch(setSelectedChannel({ selectedChannel: +ch }))
-        this.setState({selected: true})
-    }
+  onSelect = ch => {
+    const { control, dispatch } = this.props
+    this.onModeSelect(control.control[ch - 1].mode)
+    this.props.dispatch(setSelectedChannel({ selectedChannel: +ch }))
+    this.setState({ selected: true })
+  }
 
-    onModeSelect = (mode) => {
-        const { dispatch } = this.props
-        this.setState({mode})
-    }
+  onModeSelect = mode => {
+    const { dispatch } = this.props
+    this.setState({ mode })
+  }
 
-    renderMode(){
-        if(!this.state.selected) return null;
-        else if(this.state.mode === 1) return  <TimerPanel/>
-        else if(this.state.mode === 0) return <ManualPanel />
-        else return null;
-    }
+  renderMode() {
+    if (!this.state.selected) return null
+    else if (this.state.mode === 1) return <TimerPanel />
+    else if (this.state.mode === 0) return <ManualPanel />
+    else return null
+  }
 
-    render() {
-        const props = this.props
-        const { control } = this.props
-        return (
-            <div>
-                <ChannelSelectPanel onSelect={this.onSelect} />
-                {
-                    (this.state.selected)? <ModeSelectPanel onModeSelect={this.onModeSelect} />:null
-                }
-                {this.renderMode()}
-            </div>
-
-        )
-    }
+  render() {
+    const props = this.props
+    const { control } = this.props
+    return (
+      <div>
+        <ChannelSelectPanel onSelect={this.onSelect} />
+        {this.state.selected ? <ModeSelectPanel onModeSelect={this.onModeSelect} /> : null}
+        {this.renderMode()}
+      </div>
+    )
+  }
 }
 
 export default ControlPage
