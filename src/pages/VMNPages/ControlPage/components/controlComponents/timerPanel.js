@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import {Form, TimePicker, Button, InputNumber, Icon, Modal, Radio} from 'antd'
+import { Form, TimePicker, Button, InputNumber, Icon, Modal, Radio } from 'antd'
 import { setControl, _setControl } from 'ducks/control'
 import moment from 'moment'
 import RefreshButton from 'components/VMNComponents/RefreshButton'
@@ -22,7 +22,7 @@ class TimerPanel extends Component {
     visible: false,
     listNumber: null,
     working: 0,
-    apply: 99
+    apply: 99,
   }
   minToTime(min) {
     let hour = Math.floor(min / 60)
@@ -120,7 +120,7 @@ class TimerPanel extends Component {
           visible={this.state.visible}
           onOk={() => {
             const { control, ch, dispatch } = this.props
-            const {listNumber, working} = this.state
+            const { listNumber, working } = this.state
 
             switch (this.state.apply) {
               case 1:
@@ -128,12 +128,12 @@ class TimerPanel extends Component {
                 break
 
               case 99:
-                const {list} = control[ch - 1].timer
-                control[ch - 1].timer.list = list
-                  .map( ([timer, _working], index) => index >= listNumber ? [timer, working] : [timer, _working])
+                const { list } = control[ch - 1].timer
+                control[ch - 1].timer.list = list.map(([timer, _working], index) =>
+                  index >= listNumber ? [timer, working] : [timer, _working],
+                )
                 break
             }
-
 
             dispatch(setControl(control, ch))
             this.setState({ visible: false })
@@ -143,7 +143,12 @@ class TimerPanel extends Component {
           centered={true}
         >
           <FormItem>
-            <Radio.Group onChange={({target}) => {this.setState({apply: target.value})}} value={this.state.apply}>
+            <Radio.Group
+              onChange={({ target }) => {
+                this.setState({ apply: target.value })
+              }}
+              value={this.state.apply}
+            >
               <Radio value={1}>Apply One</Radio>
               <Radio value={99}>Apply from now</Radio>
             </Radio.Group>
