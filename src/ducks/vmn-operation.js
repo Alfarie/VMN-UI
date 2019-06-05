@@ -21,7 +21,7 @@ const initState = {
   'number-plant': [10, 10, 10, 10, 10, 10, 10, 10],
   'number-drippers': [10, 10, 10, 10, 10, 10, 10, 10],
   'water-flow': [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-  'station-name': ['A1', 'B1', 'A2', 'B2', 'A3', 'B3', 'A4', 'B4'],
+  'station-name': ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'],
 }
 
 export const getOperation = () => async (dispatch, getState) => {

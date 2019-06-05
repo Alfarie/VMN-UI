@@ -27,7 +27,7 @@ class Plant extends React.Component {
     mode: 0,
     totalConsume: [0, 0, 0, 0, 0, 0, 0, 0],
     currentConsume: [0, 0, 0, 0, 0, 0, 0, 0],
-    plantName: ['A1', 'B1', 'A2', 'B2', 'A3', 'B3', 'A4', 'B4'],
+    plantName: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'],
   }
 
   getPercentDrain = () => {
@@ -214,6 +214,45 @@ class Plant extends React.Component {
     )
   }
 
+  renderUniversal() {
+    const { nodes, stationName, numberPlants } = this.props
+    const { currentConsume, totalConsume } = this.state
+    const style = (window.innerWidth < 1200) ? {
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'flex-start',
+    }
+    : {
+        display: 'flex',
+        flexDirection: 'column',
+        flexWrap: 'wrap',
+        justifyContent: 'flex-start',
+        height: '550px'
+      }
+
+    console.log(window.innerWidth, style)
+    return (
+      <div style={style}>
+        {
+          stationName.map((n, i) => {
+            return (
+                <SensorCard key={`${n}-${i}`}
+                            id={stationName[i]}
+                            numberOfPlant={numberPlants[i]}
+                            value={nodes[i+1]}
+                            mode={this.state.mode}
+                            totalConsume={totalConsume[i]}
+                            currentConsume={currentConsume[i]}
+                />
+            )
+          })
+        }
+      </div>
+    )
+  }
+
+
   render() {
     const { operation } = this.props
     return (
@@ -236,7 +275,7 @@ class Plant extends React.Component {
         </div>
         {/*<MobileView>{this.renderMobile()}</MobileView>*/}
         {/*<BrowserView>{this.renderBrowser()}</BrowserView>*/}
-        {this.renderBrowser()}
+        {this.renderUniversal()}
       </div>
     )
   }
