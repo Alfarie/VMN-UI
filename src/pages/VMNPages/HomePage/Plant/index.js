@@ -234,8 +234,9 @@ class Plant extends React.Component {
             </Button.Group>
           </div>
         </div>
-        <MobileView>{this.renderMobile()}</MobileView>
-        <BrowserView>{this.renderBrowser()}</BrowserView>
+        {/*<MobileView>{this.renderMobile()}</MobileView>*/}
+        {/*<BrowserView>{this.renderBrowser()}</BrowserView>*/}
+        {this.renderBrowser()}
       </div>
     )
   }
